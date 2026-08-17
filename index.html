@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SERGEANT — Find Your Next Home</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #faf8f2;
+  color: #263238;
+}
+
+header {
+  background: #142b4a;
+  color: #fffdf7;
+  padding: 22px 20px;
+  text-align: center;
+  border-bottom: 4px solid #c9a44c;
+}
+
+.logo {
+  font-size: 31px;
+  font-weight: 800;
+  letter-spacing: 5px;
+}
+
+header p {
+  color: #ead9a8;
+  margin-top: 6px;
+}
+
+nav {
+  background: #0d1d33;
+  padding: 10px;
+  text-align: center;
+}
+
+nav button {
+  width: auto;
+  padding: 9px 16px;
+  margin: 3px;
+  background: #c9a44c;
+  color: #142b4a;
+  border: none;
+  border-radius: 7px;
+  font-weight: bold;
+}
+
+.hero {
+  background: #f7f0df;
+  padding: 42px 20px;
+  text-align: center;
+}
+
+.hero h1 {
+  color: #142b4a;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  color: #73777c;
+  line-height: 1.6;
+}
+
+.search-box {
+  width: 92%;
+  max-width: 1050px;
+  margin: 25px auto;
+  padding: 22px;
+  background: #fffdf7;
+  border: 1px solid #eee4ce;
+  border-radius: 15px;
+}
+
+.search-box h2 {
+  color: #142b4a;
+  margin-bottom: 17px;
+}
+
+.search-fields {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr auto;
+  gap: 10px;
+}
+
+.search-fields input,
+.search-fields select {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #ddd3bd;
+  border-radius: 8px;
+  background: #faf8f2;
+  font-size: 14px;
+}
+
+.search-fields button {
+  width: auto;
+  padding: 13px 18px;
+  border: none;
+  border-radius: 8px;
+  background: #142b4a;
+  color: white;
+  font-weight: bold;
+}
+
+.container {
+  width: 92%;
+  max-width: 1050px;
+  margin: 35px auto;
+}
+
+.section {
+  background: #fffdf7;
+  border: 1px solid #eee4ce;
+  border-radius: 15px;
+  padding: 22px;
+  margin-bottom: 25px;
+}
+
+.section h2 {
+  color: #142b4a;
+  margin-bottom: 18px;
+}
+
+label {
+  display: block;
+  color: #142b4a;
+  font-weight: bold;
+  font-size: 14px;
+  margin: 15px 0 7px;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #ddd3bd;
+  border-radius: 8px;
+  background: #faf8f2;
+  font-size: 15px;
+}
+
+textarea {
+  min-height: 100px;
+}
+
+.publish {
+  width: 100%;
+  margin-top: 20px;
+  padding: 15px;
+  background: #142b4a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.property {
+  background: #fffdf7;
+  border: 1px solid #eee4ce;
+  border-radius: 15px;
+  overflow: hidden;
+  margin-bottom: 25px;
+}
+
+.property img {
+  width: 100%;
+  max-height: 320px;
+  object-fit: cover;
+  display: block;
+}
+
+.property-content {
+  padding: 20px;
+}
+
+.badge {
+  display: inline-block;
+  background: #ead9a8;
+  color: #142b4a;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.property h3 {
+  color: #142b4a;
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+
+.location {
+  color: #73777c;
+  margin-bottom: 15px;
+}
+
+.price {
+  color: #142b4a;
+  font-size: 23px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.details {
+  color: #59636b;
+  line-height: 1.7;
+  margin-bottom: 15px;
+}
+
+.locked {
+  background: #fff1e6;
+  color: #925b35;
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.delete-btn {
+  margin-top: 12px;
+  background: #8c4a3b;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 7px;
+}
+
+#admin {
+  display: none;
+}
+
+.empty {
+  text-align: center;
+  color: #73777c;
+  padding: 30px;
+}
+
+footer {
+  background: #142b4a;
+  color: #ead9a8;
+  text-align: center;
+  padding: 35px 20px;
+  margin-top: 50px;
+  line-height: 1.8;
+}
+
+footer strong {
+  color: #fffdf7;
+  letter-spacing: 3px;
+}
+
+@media (max-width: 700px) {
+  .search-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .search-fields button {
+    width: 100%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">SERGEANT</div>
+  <p>Find your next home.</p>
+</header>
+
+<nav>
+  <button onclick="showListings()">Properties</button>
+  <button onclick="showAdmin()">＋ Add Property</button>
+</nav>
+
+<section class="hero">
+  <h1>Quality Homes. Better Choices.</h1>
+  <p>Affordable properties in locations you can trust.</p>
+</section>
+
+<div class="search-box">
+
+  <h2>Find Your Home</h2>
+
+  <div class="search-fields">
+
+    <input
+      id="searchLocation"
+      type="text"
+      placeholder="📍 Location e.g. Makurdi"
+    >
+
+    <select id="searchType">
+      <option value="">All property types</option>
+      <option>Face-Me-I-Face-You</option>
+      <option>Self-Contained</option>
+      <option>Single Room</option>
+      <option>1 Bedroom Flat</option>
+      <option>2 Bedroom Flat</option>
+      <option>3 Bedroom Flat</option>
+      <option>Duplex</option>
+      <option>Compound</option>
+    </select>
+
+    <input
+      id="searchPrice"
+      type="number"
+      placeholder="₦ Maximum yearly rent"
+    >
+
+    <button onclick="searchProperties()">
+      🔎 SEARCH
+    </button>
+
+  </div>
+
+</div>
+
+<div class="container">
+
+  <div id="listings">
+
+    <div class="section">
+
+      <h2>Available Properties</h2>
+
+      <div id="propertyList">
+        <div class="empty">
+          No properties added yet.
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div id="admin">
+
+    <div class="section">
+
+      <h2>＋ Add New Property</h2>
+
+      <label>Property name</label>
+      <input id="propertyName" type="text"
+        placeholder="e.g. Apartment Block Complex">
+
+      <label>General location</label>
+      <input id="propertyLocation" type="text"
+        placeholder="e.g. Makurdi, Benue State">
+
+      <label>House type</label>
+      <select id="propertyType">
+        <option>Face-Me-I-Face-You</option>
+        <option>Self-Contained</option>
+        <option>Single Room</option>
+        <option>1 Bedroom Flat</option>
+        <option>2 Bedroom Flat</option>
+        <option>3 Bedroom Flat</option>
+        <option>Duplex</option>
+        <option>Compound</option>
+      </select>
+
+      <label>Rent</label>
+      <input id="propertyPrice" type="number"
+        placeholder="250000">
+
+      <label>Number of available units</label>
+      <input id="propertyUnits" type="number"
+        placeholder="4">
+
+      <label>Description</label>
+      <textarea id="propertyDescription"
+        placeholder="Describe the property..."></textarea>
+
+      <label>Amenities</label>
+      <input id="propertyAmenities" type="text"
+        placeholder="Water, electricity, parking, road access">
+
+      <label>Exact location 🔒</label>
+      <input id="propertyExact" type="text"
+        placeholder="Only subscribers will see this">
+
+      <label>Property photo</label>
+      <input id="propertyPhoto" type="file"
+        accept="image/*">
+
+      <button class="publish" onclick="addProperty()">
+        PUBLISH PROPERTY
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  <strong>SERGEANT</strong>
+  <p>Property listings made simple.</p>
+  <p>© 2026 SERGEANT</p>
+</footer>
+
+<script>
+
+let properties =
+  JSON.parse(localStorage.getItem("sergeantProperties")) || [];
+
+
+function showAdmin() {
+  document.getElementById("listings").style.display = "none";
+  document.getElementById("admin").style.display = "block";
+}
+
+
+function showListings() {
+  document.getElementById("admin").style.display = "none";
+  document.getElementById("listings").style.display = "block";
+  displayProperties();
+}
+
+
+function addProperty() {
+
+  const name =
+    document.getElementById("propertyName").value;
+
+  const location =
+    document.getElementById("propertyLocation").value;
+
+  const type =
+    document.getElementById("propertyType").value;
+
+  const price =
+    document.getElementById("propertyPrice").value;
+
+  const units =
+    document.getElementById("propertyUnits").value;
+
+  const description =
+    document.getElementById("propertyDescription").value;
+
+  const amenities =
+    document.getElementById("propertyAmenities").value;
+
+  const exact =
+    document.getElementById("propertyExact").value;
+
+  const photoInput =
+    document.getElementById("propertyPhoto");
+
+  if (!name || !location || !price) {
+    alert("Please enter the property name, location and rent.");
+    return;
+  }
+
+  const reader = new FileReader();
+
+  reader.onload = function(event) {
+
+    const property = {
+
+      id: Date.now(),
+      name: name,
+      location: location,
+      type: type,
+      price: price,
+      units: units,
+      description: description,
+      amenities: amenities,
+      exact: exact,
+      photo: event.target.result
+
+    };
+
+    properties.push(property);
+
+    localStorage.setItem(
+      "sergeantProperties",
+      JSON.stringify(properties)
+    );
+
+    alert("Property added successfully!");
+
+    document.getElementById("propertyName").value = "";
+    document.getElementById("propertyLocation").value = "";
+    document.getElementById("propertyPrice").value = "";
+    document.getElementById("propertyUnits").value = "";
+    document.getElementById("propertyDescription").value = "";
+    document.getElementById("propertyAmenities").value = "";
+    document.getElementById("propertyExact").value = "";
+    document.getElementById("propertyPhoto").value = "";
+
+    showListings();
+
+  };
+
+  if (photoInput.files.length > 0) {
+    reader.readAsDataURL(photoInput.files[0]);
+  } else {
+    reader.onload({target:{result:""}});
+  }
+
+}
+
+
+function displayProperties() {
+
+  const list =
+    document.getElementById("propertyList");
+
+  if (properties.length === 0) {
+
+    list.innerHTML =
+      '<div class="empty">No properties added yet.</div>';
+
+    return;
+  }
+
+  list.innerHTML = "";
+
+  properties.forEach(function(property) {
+
+    const card =
+      document.createElement("div");
+
+    card.className = "property";
+
+    card.innerHTML = `
+
+      ${
+        property.photo
+        ? `<img src="${property.photo}" alt="Property photo">`
+        : ""
+      }
+
+      <div class="property-content">
+
+        <span class="badge">AVAILABLE</span>
+
+        <h3>${property.name}</h3>
+
+        <p class="location">
+          📍 ${property.location}
+        </p>
+
+        <p class="price">
+          ₦${Number(property.price).toLocaleString()}
+          <small>/ year</small>
+        </p>
+
+        <p class="details">
+          <strong>Type:</strong> ${property.type}<br>
+          <strong>Units:</strong> ${property.units}<br>
+          <strong>Amenities:</strong> ${property.amenities}
+          <br><br>
+          ${property.description}
+        </p>
+
+        <div class="locked">
+          🔒 Exact location locked
+        </div>
+
+        <button
+          onclick="subscribe()"
+          class="publish">
+          Subscribe to View Location
+        </button>
+
+        <button
+          onclick="deleteProperty(${property.id})"
+          class="delete-btn">
+          Delete Property
+        </button>
+
+      </div>
+    `;
+
+    list.appendChild(card);
+
+  });
+
+}
+
+
+function deleteProperty(id) {
+
+  if (confirm("Delete this property?")) {
+
+    properties =
+      properties.filter(
+        property => property.id !== id
+      );
+
+    localStorage.setItem(
+      "sergeantProperties",
+      JSON.stringify(properties)
+    );
+
+    displayProperties();
+
+  }
+
+}
+
+
+function searchProperties() {
+
+  const location =
+    document.getElementById("searchLocation").value
+      .toLowerCase()
+      .trim();
+
+  const type =
+    document.getElementById("searchType").value;
+
+  const maxPrice =
+    Number(document.getElementById("searchPrice").value);
+
+  const filtered = properties.filter(function(property) {
+
+    const locationMatch =
+      !location ||
+      property.location.toLowerCase().includes(location);
+
+    const typeMatch =
+      !type ||
+      property.type === type;
+
+    const priceMatch =
+      !maxPrice ||
+      Number(property.price) <= maxPrice;
+
+    return locationMatch &&
+           typeMatch &&
+           priceMatch;
+
+  });
+
+  displaySearchResults(filtered);
+
+}
+
+
+function displaySearchResults(results) {
+
+  const list =
+    document.getElementById("propertyList");
+
+  if (results.length === 0) {
+
+    list.innerHTML = `
+      <div class="empty">
+        No properties match your search.
+      </div>
+    `;
+
+    return;
+  }
+
+  list.innerHTML = "";
+
+  results.forEach(function(property) {
+
+    const card =
+      document.createElement("div");
+
+    card.className = "property";
+
+    card.innerHTML = `
+
+      ${
+        property.photo
+        ? `<img src="${property.photo}" alt="Property photo">`
+        : ""
+      }
+
+      <div class="property-content">
+
+        <span class="badge">AVAILABLE</span>
+
+        <h3>${property.name}</h3>
+
+        <p class="location">
+          📍 ${property.location}
+        </p>
+
+        <p class="price">
+          ₦${Number(property.price).toLocaleString()}
+          <small>/ year</small>
+        </p>
+
+        <p class="details">
+          <strong>Type:</strong> ${property.type}<br>
+          <strong>Units:</strong> ${property.units}<br>
+          <strong>Amenities:</strong> ${property.amenities}
+          <br><br>
+          ${property.description}
+        </p>
+
+        <div class="locked">
+          🔒 Exact location locked
+        </div>
+
+        <button
+          onclick="subscribe()"
+          class="publish">
+          Subscribe to View Location
+        </button>
+
+      </div>
+    `;
+
+    list.appendChild(card);
+
+  });
+
+}
+
+
+function subscribe() {
+
+  alert(
+    "SERGEANT Subscription\n\n" +
+    "Exact location access will be available " +
+    "after subscription.\n\n" +
+    "Payment system coming soon."
+  );
+
+}
+
+
+displayProperties();
+
+</script>
+
+</body>
+  </html>
