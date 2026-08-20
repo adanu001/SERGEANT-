@@ -442,7 +442,7 @@ function showListings() {
 }
 
 
-async function addProperty() {
+function addProperty() {
 
   const name =
     document.getElementById("propertyName").value;
@@ -501,11 +501,7 @@ async function addProperty() {
       "sergeantProperties",
       JSON.stringify(properties)
     );
-await supabaseClient.from("properties").insert({
-  property_name: name,
-  description: description,
-  price: price
-});
+
     alert("Property added successfully!");
 
     document.getElementById("propertyName").value = "";
