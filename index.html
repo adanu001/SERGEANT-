@@ -413,7 +413,16 @@ footer strong {
   <p>Property listings made simple.</p>
   <p>© 2026 SERGEANT</p>
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const SUPABASE_URL = "https://uvcotpxrrmoxozbtuych.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_4sb8QPH-J0TwrJ8A-yVXiA_Di-Fv2dl";
 
+  const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+</script>
 <script>
 
 let properties =
