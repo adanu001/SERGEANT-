@@ -469,7 +469,7 @@ function addProperty() {
 
   const reader = new FileReader();
 
-  reader.onload = function(event) {
+  reader.onload = async function(event) {
 
     const property = {
 
@@ -492,7 +492,24 @@ function addProperty() {
       "sergeantProperties",
       JSON.stringify(properties)
     );
+const { error } = await supabaseClient
+  .from("properties")
+  .insert({
+    "Property Name": name,
+    "Description": description,
+    "Price": Number(price),
+    location: location,
+    type: type,
+    units: Number(units),
+    amenities: amenities,
+    exact_location: exact
+  });
 
+if (error) {
+  console.error("Supabase error:", error);
+  alert("Property saved on this device, but could not be saved to the database.");
+  return;
+  }
     alert("Property added successfully!");
 
     document.getElementById("propertyName").value = "";
@@ -749,7 +766,7 @@ displayProperties();
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
   const SUPABASE_URL = "https://uvcotpxrrmoxozbtuych.supabase.co";
-  const SUPABASE_KEY = "YOUR_PUBLISHABLE_KEY";
+  const SUPABASE_KEY = "sb_publishable_4sb8QPH-J0TwrJ8A-yVXiA_Di-Fv2dl";
 
   const supabaseClient = window.supabase.createClient(
     SUPABASE_URL,
