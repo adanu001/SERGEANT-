@@ -504,10 +504,17 @@ const { error } = await supabaseClient
     amenities: amenities,
     exact_location: exact
   });
-
 if (error) {
-  console.error("Supabase error:", error);
-  alert("Property saved on this device, but could not be saved to the database.");
+  console.error("SUPABASE ERROR:", error);
+
+  alert(
+    "SUPABASE ERROR\n\n" +
+    "Message: " + error.message + "\n\n" +
+    "Details: " + (error.details || "None") + "\n\n" +
+    "Hint: " + (error.hint || "None") + "\n\n" +
+    "Code: " + (error.code || "None")
+  );
+
   return;
   }
     alert("Property added successfully!");
